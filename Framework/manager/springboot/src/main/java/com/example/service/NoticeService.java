@@ -23,12 +23,12 @@ public class NoticeService {
     /**
      * 新增
      */
-    public void add(Notice notice) {
-        notice.setTime(DateUtil.today());
-        Account currentUser = TokenUtils.getCurrentUser();
-        notice.setUser(currentUser.getUsername());
-        noticeMapper.insert(notice);
-    }
+//    public void add(Notice notice) {
+//        notice.setTime(DateUtil.today());
+//        Account currentUser = TokenUtils.getCurrentUser();
+//        notice.setUser(currentUser.getUsername());
+//        noticeMapper.insert(notice);
+//    }
 
     /**
      * 删除

@@ -3,10 +3,23 @@ server:
 
 # 数据库配置
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587  # 使用 TLS 时端口是 587，SSL 则是 465
+    username: wjh19980412@gmail.com
+    password: ezgzrozfqutrnqkt  # 确保这个是正确的 Gmail 应用专用密码
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true   # 这里使用 TLS，推荐使用
+
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root   #你本地的数据库用户名
-    password: 123456 #你本地的数据库密码
+    username: root
+    password: 123456
     url: jdbc:mysql://localhost:3306/manager?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8&allowPublicKeyRetrieval=true
   servlet:
     multipart:

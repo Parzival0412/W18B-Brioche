@@ -5,70 +5,85 @@
 <mapper namespace="com.example.mapper.NoticeMapper">
 
     <sql id="Base_Column_List">
-        id,title,content,time,user
+        invoice_id, invoice_number, issue_date, supplier_name, supplier_abn, supplier_address,
+        customer_name, customer_address, items, total_amount, gst_included
     </sql>
 
+    <!-- 查询所有 -->
     <select id="selectAll" resultType="com.example.entity.Notice">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from notice
         <where>
-            <if test="id != null"> and id= #{id}</if>
-            <if test="title != null"> and title like concat('%', #{title}, '%')</if>
-            <if test="content != null"> and content= #{content}</if>
-            <if test="time != null"> and time= #{time}</if>
-            <if test="user != null"> and user= #{user}</if>
+            <!-- 动态过滤条件，可根据需要增删 -->
+            <if test="invoiceId != null"> AND invoice_id = #{invoiceId}</if>
+            <if test="invoiceNumber != null"> AND invoice_number = #{invoiceNumber}</if>
+            <if test="supplierName != null"> AND supplier_name LIKE concat('%', #{supplierName}, '%')</if>
+            <if test="customerName != null"> AND customer_name LIKE concat('%', #{customerName}, '%')</if>
+            <if test="issueDate != null"> AND issue_date = #{issueDate}</if>
         </where>
-        order by id desc
+        order by invoice_id desc
     </select>
 
+    <!-- 根据ID查询 -->
     <select id="selectById" resultType="com.example.entity.Notice">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from notice
-        where id = #{id}
+        where invoice_id = #{invoiceId}
     </select>
 
-    <delete id="deleteById">
-        delete from notice
-        where  id = #{id}
-    </delete>
-
-    <insert id="insert" parameterType="com.example.entity.Notice" useGeneratedKeys="true">
+    <!-- 新增 -->
+    <insert id="insert" parameterType="com.example.entity.Notice" useGeneratedKeys="true" keyProperty="invoiceId">
         insert into notice
         <trim prefix="(" suffix=")" suffixOverrides=",">
-                <if test="id != null">id,</if>
-                <if test="title != null">title,</if>
-                <if test="content != null">content,</if>
-                <if test="time != null">time,</if>
-                <if test="user != null">user,</if>
+            <if test="invoiceNumber != null">invoice_number,</if>
+            <if test="issueDate != null">issue_date,</if>
+            <if test="supplierName != null">supplier_name,</if>
+            <if test="supplierAbn != null">supplier_abn,</if>
+            <if test="supplierAddress != null">supplier_address,</if>
+            <if test="customerName != null">customer_name,</if>
+            <if test="customerAddress != null">customer_address,</if>
+            <if test="items != null">items,</if>
+            <if test="totalAmount != null">total_amount,</if>
+            <if test="gstIncluded != null">gst_included,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-                <if test="id != null">#{id},</if>
-                <if test="title != null">#{title},</if>
-                <if test="content != null">#{content},</if>
-                <if test="time != null">#{time},</if>
-                <if test="user != null">#{user},</if>
+            <if test="invoiceNumber != null">#{invoiceNumber},</if>
+            <if test="issueDate != null">#{issueDate},</if>
+            <if test="supplierName != null">#{supplierName},</if>
+            <if test="supplierAbn != null">#{supplierAbn},</if>
+            <if test="supplierAddress != null">#{supplierAddress},</if>
+            <if test="customerName != null">#{customerName},</if>
+            <if test="customerAddress != null">#{customerAddress},</if>
+            <if test="items != null">#{items},</if>
+            <if test="totalAmount != null">#{totalAmount},</if>
+            <if test="gstIncluded != null">#{gstIncluded},</if>
         </trim>
     </insert>
 
+    <!-- 修改 -->
     <update id="updateById" parameterType="com.example.entity.Notice">
         update notice
         <set>
-            <if test="title != null">
-                title = #{title},
-            </if>
-            <if test="content != null">
-                content = #{content},
-            </if>
-            <if test="time != null">
-                time = #{time},
-            </if>
-            <if test="user != null">
-                user = #{user},
-            </if>
+            <if test="invoiceNumber != null"> invoice_number = #{invoiceNumber},</if>
+            <if test="issueDate != null"> issue_date = #{issueDate},</if>
+            <if test="supplierName != null"> supplier_name = #{supplierName},</if>
+            <if test="supplierAbn != null"> supplier_abn = #{supplierAbn},</if>
+            <if test="supplierAddress != null"> supplier_address = #{supplierAddress},</if>
+            <if test="customerName != null"> customer_name = #{customerName},</if>
+            <if test="customerAddress != null"> customer_address = #{customerAddress},</if>
+            <if test="items != null"> items = #{items},</if>
+            <if test="totalAmount != null"> total_amount = #{totalAmount},</if>
+            <if test="gstIncluded != null"> gst_included = #{gstIncluded},</if>
         </set>
-        where id = #{id} 
+        where invoice_id = #{invoiceId}
     </update>
+
+    <!-- 删除 -->
+    <delete id="deleteById">
+        delete from notice
+        where invoice_id = #{invoiceId}
+    </delete>
 
 </mapper>

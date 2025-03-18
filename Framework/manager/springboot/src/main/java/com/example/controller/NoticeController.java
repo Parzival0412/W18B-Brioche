@@ -21,11 +21,11 @@ public class NoticeController {
     /**
      * 新增
      */
-    @PostMapping("/add")
-    public Result add(@RequestBody Notice notice) {
-        noticeService.add(notice);
-        return Result.success();
-    }
+//    @PostMapping("/add")
+//    public Result add(@RequestBody Notice notice) {
+//        noticeService.add(notice);
+//        return Result.success();
+//    }
 
     /**
      * 删除
