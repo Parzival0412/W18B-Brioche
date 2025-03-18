@@ -79,7 +79,7 @@ export default {
             if (res.code === "200") {
               localStorage.setItem("xm-user", JSON.stringify(res.data)); // 存储用户数据
               this.$router.push("/"); // 跳转主页
-              this.$message.success("登录成功");
+              this.$message.success("Login successfully");
             } else {
               this.$message.error(res.msg);
             }
