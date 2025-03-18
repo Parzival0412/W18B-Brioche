@@ -54,20 +54,20 @@
         >
           <el-menu-item index="/home">
             <i class="el-icon-s-home"></i>
-            <span slot="title">系统首页</span>
+            <span slot="title">Home page of the system</span>
           </el-menu-item>
           <el-submenu index="info">
             <template slot="title">
-              <i class="el-icon-menu"></i><span>信息管理</span>
+              <i class="el-icon-menu"></i><span>Information management</span>
             </template>
-            <el-menu-item index="/notice">公告信息</el-menu-item>
+            <el-menu-item index="/notice">Announcement information</el-menu-item>
           </el-submenu>
 
           <el-submenu index="user">
             <template slot="title">
-              <i class="el-icon-menu"></i><span>用户管理</span>
+              <i class="el-icon-menu"></i><span>User management</span>
             </template>
-            <el-menu-item index="/admin">管理员信息</el-menu-item>
+            <el-menu-item index="/admin">Administrator information</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>

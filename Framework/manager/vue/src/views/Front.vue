@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="front-notice"><i class="el-icon-bell" style="margin-right: 2px"></i>公告：{{ top }}</div>
+    <div class="front-notice"><i class="el-icon-bell" style="margin-right: 2px"></i>Notice：{{ top }}</div>
     <!--头部-->
     <div class="front-header">
       <div class="front-header-left">
         <img src="@/assets/imgs/logo.png" alt="">
-        <div class="title">项目前台</div>
+        <div class="title">Project front desk</div>
       </div>
       <div class="front-header-center">
         <div class="front-header-nav">
@@ -17,8 +17,8 @@
       </div>
       <div class="front-header-right">
         <div v-if="!user.username">
-          <el-button @click="$router.push('/login')">登录</el-button>
-          <el-button @click="$router.push('/register')">注册</el-button>
+          <el-button @click="$router.push('/login')">Login</el-button>
+          <el-button @click="$router.push('/register')">Register</el-button>
         </div>
         <div v-else>
           <el-dropdown>

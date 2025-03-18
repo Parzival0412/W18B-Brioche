@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center">
-      <div style="font-size: 40px">404 cannot find page <router-link to="/">return to homepage</router-link></div>
+      <div style="font-size: 40px">404 Not find page <router-link to="/">Return to homepage</router-link></div>
     </div>
 
   </div>
