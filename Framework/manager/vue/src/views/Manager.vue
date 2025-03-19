@@ -4,7 +4,7 @@
     <div class="manager-header">
       <div class="manager-header-left">
         <img src="@/assets/imgs/logo.png" />
-        <div class="title">Backend management system</div>
+        <div class="title">Invoice system</div>
       </div>
 
       <div class="manager-header-center">
@@ -31,7 +31,7 @@
           </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="goToPerson"
-              >personal information</el-dropdown-item
+              >personal info</el-dropdown-item
             >
             <el-dropdown-item @click.native="$router.push('/password')"
               >Change password</el-dropdown-item
@@ -54,20 +54,20 @@
         >
           <el-menu-item index="/home">
             <i class="el-icon-s-home"></i>
-            <span slot="title">Home page of the system</span>
+            <span slot="title">Homepage</span>
           </el-menu-item>
           <el-submenu index="info">
             <template slot="title">
-              <i class="el-icon-menu"></i><span>Information management</span>
+              <i class="el-icon-menu"></i><span>Info management</span>
             </template>
-            <el-menu-item index="/notice">Announcement information</el-menu-item>
+            <el-menu-item index="/notice">Announcement info</el-menu-item>
           </el-submenu>
 
           <el-submenu index="user">
             <template slot="title">
               <i class="el-icon-menu"></i><span>User management</span>
             </template>
-            <el-menu-item index="/admin">Administrator information</el-menu-item>
+            <el-menu-item index="/admin">Administrator info</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>

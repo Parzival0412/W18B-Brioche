@@ -10,8 +10,8 @@
       <div class="front-header-center">
         <div class="front-header-nav">
           <el-menu :default-active="$route.path" mode="horizontal" router>
-						<el-menu-item index="/front/home">首页</el-menu-item>
-						<el-menu-item index="/front/person">个人中心</el-menu-item>
+						<el-menu-item index="/front/home">Homepage</el-menu-item>
+						<el-menu-item index="/front/person">Accounts</el-menu-item>
           </el-menu>
         </div>
       </div>
@@ -30,7 +30,7 @@
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <div style="text-decoration: none" @click="logout">退出</div>
+                <div style="text-decoration: none" @click="logout">Log out</div>
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
