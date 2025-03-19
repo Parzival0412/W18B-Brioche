@@ -1,20 +1,27 @@
 <template>
   <div>
     <div class="card" style="padding: 15px">
-      您好，{{ user?.name }}！欢迎使用本系统
+      hello，{{ user?.name }}！Welcome to this system
     </div>
 
     <div style="display: flex; margin: 10px 0">
-      <div style="width: 50%;" class="card">
-        <div style="margin-bottom: 30px; font-size: 20px; font-weight: bold">公告列表</div>
-        <div >
-          <el-timeline  reverse slot="reference">
-            <el-timeline-item v-for="item in notices" :key="item.id" :timestamp="item.time">
+      <div style="width: 50%" class="card">
+        <div style="margin-bottom: 30px; font-size: 20px; font-weight: bold">
+          Announcement list
+        </div>
+        <div>
+          <el-timeline reverse slot="reference">
+            <el-timeline-item
+              v-for="item in notices"
+              :key="item.id"
+              :timestamp="item.time"
+            >
               <el-popover
-                  placement="right"
-                  width="200"
-                  trigger="hover"
-                  :content="item.content">
+                placement="right"
+                width="200"
+                trigger="hover"
+                :content="item.content"
+              >
                 <span slot="reference">{{ item.title }}</span>
               </el-popover>
             </el-timeline-item>
@@ -26,19 +33,18 @@
 </template>
 
 <script>
-
 export default {
-  name: 'Home',
+  name: "Home",
   data() {
     return {
-      user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
-      notices: []
-    }
+      user: JSON.parse(localStorage.getItem("xm-user") || "{}"),
+      notices: [],
+    };
   },
   created() {
-    this.$request.get('/notice/selectAll').then(res => {
-      this.notices = res.data || []
-    })
-  }
-}
+    this.$request.get("/notice/selectAll").then((res) => {
+      this.notices = res.data || [];
+    });
+  },
+};
 </script>
