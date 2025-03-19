@@ -150,21 +150,17 @@ export default {
     },
     // 发送邮件功能
     sendInvoice(row) {
-      this.$prompt('请输入收件人邮箱', '发送邮件', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$prompt('Please enter email', 'Send Email', {
+        confirmButtonText: 'confirm',
+        cancelButtonText: 'cancel',
         inputPattern: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-        inputErrorMessage: '邮箱格式不正确'
+        inputErrorMessage: 'The mailbox format is incorrect'
       }).then(({ value }) => {
-        // 拼接参数到 URL 中，然后发送 POST 请求
         const url = `/invoice/sendInvoiceEmail?invoiceId=${row.invoiceId}&email=${encodeURIComponent(value)}`;
         this.$request.post(url).then(res => {
-          // 不再检查 "✅"
-          // 直接弹出返回字符串
           this.$message.success(res.data);
         }).catch(() => {
-          // 如果出现异常，就只提示错误
-          this.$message.error('邮件发送出错');
+          this.$message.error('Mail sending error');
         });
       }).catch(() => {});
     },

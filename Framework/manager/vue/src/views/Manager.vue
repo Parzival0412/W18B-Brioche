@@ -4,7 +4,7 @@
     <div class="manager-header">
       <div class="manager-header-left">
         <img src="@/assets/imgs/logo.png" />
-        <div class="title">Backend management system</div>
+        <div class="title">Brioche Express</div>
       </div>
 
       <div class="manager-header-center">
@@ -54,20 +54,20 @@
         >
           <el-menu-item index="/home">
             <i class="el-icon-s-home"></i>
-            <span slot="title">Home page of the system</span>
+            <span slot="title">Home page</span>
           </el-menu-item>
           <el-submenu index="info">
             <template slot="title">
-              <i class="el-icon-menu"></i><span>Information management</span>
+              <i class="el-icon-menu"></i><span>Information</span>
             </template>
-            <el-menu-item index="/notice">Announcement information</el-menu-item>
+            <el-menu-item index="/notice">Invoice</el-menu-item>
           </el-submenu>
 
           <el-submenu index="user">
             <template slot="title">
               <i class="el-icon-menu"></i><span>User management</span>
             </template>
-            <el-menu-item index="/admin">Administrator information</el-menu-item>
+            <el-menu-item index="/admin">User information</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
