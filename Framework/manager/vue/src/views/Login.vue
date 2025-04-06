@@ -64,8 +64,20 @@ export default {
     return {
       form: { role: "ADMIN" },
       rules: {
-        username: [{ required: true, message: "Please enter the account number", trigger: "blur" }],
-        password: [{ required: true, message: "Please enter the password.", trigger: "blur" }],
+        username: [
+          {
+            required: true,
+            message: "Please enter the account number",
+            trigger: "blur",
+          },
+        ],
+        password: [
+          {
+            required: true,
+            message: "Please enter the password.",
+            trigger: "blur",
+          },
+        ],
       },
     };
   },

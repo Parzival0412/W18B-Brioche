@@ -1,176 +1,169 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+
 .manager-container {
-    background-color: #f8f8ff;
-    min-height: 100vh;
+  background: linear-gradient(135deg, #2a2e3f, #3a3f58);
+  min-height: 100vh;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: #eaeaea;
 }
 
 .manager-header {
-    display: flex;
-    background-color: #2c334c;
+  display: flex;
+  background: rgba(45, 49, 67, 0.95);
+  backdrop-filter: blur(6px);
+  height: 64px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: background 0.3s ease-in-out;
 }
 
 .manager-header-left {
-    width: 200px;
-    height: 60px;
-    padding-left: 10px;
-    display: flex;
-    align-items: center
+  width: 220px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
 }
-
 .manager-header-left img {
-    width: 40px;
-    height: 40px;
+  width: 36px;
+  height: 36px;
 }
-
 .manager-header-left .title {
-    flex: 1;
-    margin-left: 5px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #ddd
+  margin-left: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
 }
 
 .manager-header-center {
-    flex: 1;
-    width: 0;
-    display: flex;
-    align-items: center
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+.el-breadcrumb__inner {
+  color: #d1d5db !important;
+  transition: color 0.2s ease;
+}
+.el-breadcrumb__inner:hover {
+  color: #fff !important;
 }
 
 .manager-header-right {
-    width: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  width: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
 }
-
-.manager-header-right .avatar {
-    display: flex;
-    align-items: center;
-    padding-right: 10px;
-    color: #ccc;
-    cursor: default
+.avatar {
+  display: flex;
+  align-items: center;
+  color: #dcdcdc;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
-
-.manager-header-right .avatar img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 5px
+.avatar:hover {
+  transform: scale(1.05);
+}
+.avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 8px;
+  border: 2px solid #5a74ff;
+  box-shadow: 0 0 8px rgba(90, 116, 255, 0.4);
 }
 
 .manager-main {
-    display: flex;
+  display: flex;
+  height: calc(100vh - 64px);
 }
 
 .manager-main-left {
-    width: 200px;
-    min-height: calc(100vh - 60px);
-    box-shadow: 0 0 6px rgba(0, 21, 41, .35);
+  width: 220px;
+  background: #2d3147;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
 }
 
 .manager-main-right {
-    flex: 1;
-    width: 0;
-    padding: 10px;
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  background: #343a50;
 }
 
-.manager-main-right .search {
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
-}
-
-.manager-main-right .operation {
-    margin-top: 5px;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1)
-}
-
+.card,
+.manager-main-right .search,
+.manager-main-right .operation,
 .manager-main-right .table {
-    margin-top: 5px;
-    padding: 15px 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover,
+.manager-main-right .search:hover,
+.manager-main-right .operation:hover,
+.manager-main-right .table:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
-.manager-main-right .table .pagination {
-    margin-top: 10px;
-}
-
-.card {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
-}
-
-/* ElementUI */
 .el-menu {
-    width: 200px;
-    height: 100%;
-    background-color: #222b40;
+  background-color: transparent !important;
 }
-
-.el-submenu__title {
-    color: #ccc;
-    height: 50px;
-    line-height: 50px;
-}
-
+.el-submenu__title,
 .el-menu-item {
-    color: #ccc;
-    height: 50px;
-    line-height: 50px;
-    background-color: #222b40 !important; /* 必须加上这个背景色，否则鼠标离开会出现白色 */
+  color: #cfd3ec !important;
+  font-weight: 500;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 20px !important;
+  transition: background-color 0.2s, color 0.2s;
 }
-
-.el-menu-item.is-active {
-    /*background-color: #2bb7e5 !important;*/
-    /*color: #fff;*/
-}
-
-.el-menu--inline .el-menu-item {
-    padding-left: 50px !important;
-}
-
-.el-menu .is-active {
-    color: #3399ff !important;
-}
-
+.el-menu-item:hover,
 .el-submenu__title:hover {
-    background-color: #222 !important;
+  background-color: #414868 !important;
+  color: #ffffff !important;
 }
-
-.el-menu-item:not(.is-active):hover {
-    /*background-color: #0376bf !important;*/
-    /*color: #fff;*/
-}
-
-.el-menu-item:hover {
-    background-color: #222 !important;
-}
-
-.el-submenu__icon-arrow {
-    margin-top: -5px;
-}
-
-.el-breadcrumb__inner {
-    color: #ccc !important;
+.el-menu .is-active {
+  color: #64b5f6 !important;
+  font-weight: bold;
 }
 
 .el-dropdown-menu {
-    margin-top: 20px !important;
+  background-color: #2e334d;
+  border: 1px solid #4e4e7a;
+  color: #ddd;
+  border-radius: 6px;
 }
-
-.el-breadcrumb {
-    margin-left: 10px;
+.el-dropdown-item:hover {
+  background-color: #5a5f80;
+  color: #fff;
 }
 
 th.el-table__cell {
-    background-color: #f8f8f8 !important;
-    color: #666;
+  background-color: #444963 !important;
+  color: #f3f3f3;
+}
+.el-table .cell {
+  color: #ddd;
+}
+
+.manager-main-right .pagination {
+  margin-top: 20px;
+  text-align: right;
+}
+
+button,
+.el-button {
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+button:hover,
+.el-button:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
