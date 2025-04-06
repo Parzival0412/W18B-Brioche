@@ -3,6 +3,7 @@ package com.example.controller;
 import com.example.common.Result;
 import com.example.entity.Admin;
 import com.example.service.AdminService;
+import com.example.utils.SHA256Encryption;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
@@ -32,6 +33,9 @@ public class AdminController {
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
+        if (1 == id){
+            return Result.error("1","管理员账号不能删除");
+        }
         adminService.deleteById(id);
         return Result.success();
     }
@@ -41,6 +45,9 @@ public class AdminController {
      */
     @DeleteMapping("/delete/batch")
     public Result deleteBatch(@RequestBody List<Integer> ids) {
+        if (ids.contains(1)){
+            return Result.error("1","管理员账号不能删除");
+        }
         adminService.deleteBatch(ids);
         return Result.success();
     }
