@@ -4,13 +4,16 @@
     <div class="manager-header">
       <div class="manager-header-left">
         <img src="@/assets/imgs/logo.png" />
-        <div class="title">Brioche Express</div>
+        <div class="title-wrap">
+          <div class="title-line1">Brioche</div>
+          <div class="title-line2">Express</div>
+        </div>
       </div>
 
       <div class="manager-header-center">
         <el-breadcrumb separator-class="el-icon-arrow-right">
           <el-breadcrumb-item :to="{ path: '/' }"
-            >front page</el-breadcrumb-item
+            ></el-breadcrumb-item
           >
           <el-breadcrumb-item :to="{ path: $route.path }">{{
             $route.meta.name
@@ -19,7 +22,6 @@
       </div>
 
       <div class="manager-header-right">
-        <el-dropdown placement="bottom">
           <div class="avatar">
             <img
               :src="
@@ -29,48 +31,54 @@
             />
             <div>{{ user.name || "administrator" }}</div>
           </div>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="goToPerson"
-              >personal information</el-dropdown-item
-            >
-            <el-dropdown-item @click.native="$router.push('/password')"
-              >Change password</el-dropdown-item
-            >
-            <el-dropdown-item @click.native="logout">Log out</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
       </div>
+
     </div>
 
-    <!--  主体  -->
+    <!-- 主体 -->
     <div class="manager-main">
-      <!--  侧边栏  -->
+      <!-- 左侧菜单栏 -->
       <div class="manager-main-left">
-        <el-menu
-          :default-openeds="['info', 'user']"
-          router
-          style="border: none"
-          :default-active="$route.path"
-        >
-          <el-menu-item index="/home">
-            <i class="el-icon-s-home"></i>
-            <span slot="title">Home page</span>
-          </el-menu-item>
-          <el-submenu index="info">
-            <template slot="title">
-              <i class="el-icon-menu"></i><span>Information</span>
-            </template>
-            <el-menu-item index="/notice">Invoice</el-menu-item>
-          </el-submenu>
+        <div class="menu-wrapper">
+          <el-menu
+              :default-openeds="['setting']"
+              router
+              style="border: none"
+              :default-active="$route.path"
+          >
+            <el-menu-item index="/home">
+              <i class="el-icon-s-home"></i>
+              <span slot="title">Home</span>
+            </el-menu-item>
 
-          <el-submenu index="user">
-            <template slot="title">
-              <i class="el-icon-menu"></i><span>User management</span>
-            </template>
-            <el-menu-item index="/admin">User information</el-menu-item>
-          </el-submenu>
-        </el-menu>
+            <el-menu-item index="/notice">
+              <i class="el-icon-document"></i>
+              <span slot="title">Invoice</span>
+            </el-menu-item>
+
+            <el-menu-item index="/admin">
+              <i class="el-icon-menu"></i>
+              <span slot="title">User information</span>
+            </el-menu-item>
+
+            <el-submenu index="setting">
+              <template slot="title">
+                <i class="el-icon-setting"></i>
+                <span>Setting</span>
+              </template>
+              <el-menu-item index="/person">Personal info</el-menu-item>
+              <el-menu-item index="/password">Change password</el-menu-item>
+            </el-submenu>
+          </el-menu>
+        </div>
+
+        <!-- ✅ 固定底部 logout -->
+        <div class="logout-container" @click="logout">
+          <i class="el-icon-switch-button" style="margin-right: 6px;"></i>
+          <span>Logout</span>
+        </div>
       </div>
+
 
       <!--  数据表格  -->
       <div class="manager-main-right">

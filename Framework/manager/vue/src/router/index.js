@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Person from '@/views/front/Person.vue'
 
 Vue.use(VueRouter)
 
@@ -17,11 +18,13 @@ const routes = [
     redirect: '/home',  // Redirect to home page
     children: [
       { path: '403', name: 'NoAuth', meta: { name: 'No Permission' }, component: () => import('../views/manager/403') },
-      { path: 'home', name: 'Home', meta: { name: 'System Home' }, component: () => import('../views/manager/Home') },
-      { path: 'admin', name: 'Admin', meta: { name: 'Admin Info' }, component: () => import('../views/manager/Admin') },
+      { path: 'home', name: 'Home', meta: { name: 'Home' }, component: () => import('../views/manager/Home') },
+      { path: 'admin', name: 'Admin', meta: { name: 'User Info' }, component: () => import('../views/manager/Admin') },
       { path: 'adminPerson', name: 'AdminPerson', meta: { name: 'Personal Info' }, component: () => import('../views/manager/AdminPerson') },
       { path: 'password', name: 'Password', meta: { name: 'Change Password' }, component: () => import('../views/manager/Password') },
-      { path: 'notice', name: 'Notice', meta: { name: 'Notice Info' }, component: () => import('../views/manager/Notice') },
+      { path: 'notice', name: 'Notice', meta: { name: 'Invoice' }, component: () => import('../views/manager/Notice') },
+      { path: '/person', component: Person, meta: { name: 'Personal info' }}
+
     ]
   },
   {
