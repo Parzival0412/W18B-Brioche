@@ -81,5 +81,13 @@ public class NoticeController {
         PageInfo<Notice> page = noticeService.selectPage(notice, pageNum, pageSize);
         return Result.success(page);
     }
+    /**
+     * add
+     */
+    @PostMapping("/add")
+    public Result add(@RequestBody Notice notice) {
+        noticeService.insert(notice);
+        return Result.success();
+    }
 
 }

@@ -75,5 +75,11 @@ public class NoticeService {
         List<Notice> list = noticeMapper.selectAll(notice);
         return PageInfo.of(list);
     }
+    /**
+     * add
+     */
+    public void insert(Notice notice) {
+        noticeMapper.insert(notice);
+    }
 
 }
