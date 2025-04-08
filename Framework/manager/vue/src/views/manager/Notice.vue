@@ -7,9 +7,25 @@
     </div>
 
     <div class="operation">
+
       <el-button type="primary" plain @click="handleAdd">Add</el-button>
-      <el-button type="danger" plain @click="delBatch">Delete</el-button>
+
+      <!-- 新增：XML 上传按钮 -->
+      <el-upload
+          :action="uploadUrl"
+          :headers="uploadHeaders"
+          :show-file-list="false"
+          name="file"
+          :on-success="handleUploadSuccess"
+          :on-error="handleUploadError"
+          style="display: inline-block; margin-left: 10px"
+      >
+        <el-button type="success" plain>Upload XML</el-button>
+      </el-upload>
+
+      <el-button type="danger" plain @click="delBatch" style="margin-left: 10px">Delete</el-button>
     </div>
+
 
     <div class="table">
       <el-table :data="tableData" stripe @selection-change="handleSelectionChange">
@@ -25,7 +41,10 @@
         <el-table-column prop="customerName" label="Customer"></el-table-column>
         <el-table-column label="Items">
           <template v-slot="scope">
-            {{ scope.row.items ? JSON.parse(scope.row.items).item + " - ¥" + JSON.parse(scope.row.items).price : "No data" }}
+              <span v-if="scope.row.items">
+                {{ JSON.parse(scope.row.items).map(i => i.items).join(', ') }}
+              </span>
+            <span v-else>No data</span>
           </template>
         </el-table-column>
         <el-table-column prop="totalAmount" label="Total Amount"></el-table-column>
@@ -93,7 +112,11 @@ export default {
       invoiceNumber: null,
       fromVisible: false,
       form: {},
-      ids: []
+      ids: [],
+      uploadUrl: 'http://localhost:9090/api/invoice/upload', // 上传接口地址
+      uploadHeaders: {
+        Authorization: localStorage.getItem('token') || ''
+      }
     }
   },
   created() {
@@ -181,7 +204,19 @@ export default {
             });
           })
           .catch(() => {});
-    }
+    },
+    handleUploadSuccess(response) {
+      if (response.error) {
+        this.$message.error(response.error);
+      } else {
+        this.$message.success("Upload success");
+        this.load(1); // 上传成功后刷新数据列表
+      }
+    },
+    handleUploadError(error) {
+      this.$message.error("Upload failed");
+      console.error(error);
+    },
   }
 }
 </script>
