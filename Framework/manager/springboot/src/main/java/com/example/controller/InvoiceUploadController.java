@@ -83,8 +83,8 @@ public class InvoiceUploadController {
 
             // 插入数据库
             String sql = "INSERT INTO notice (" +
-                    "invoice_id, issue_date, supplier_name, supplier_abn, supplier_email, " +
-                    "customer_name, customer_email, total_amount, gst_included, items_summary" +
+                    "invoice_number, issue_date, supplier_name, supplier_abn, supplier_address, " +
+                    "customer_name, customer_address, total_amount, gst_included, items" +
                     ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             jdbcTemplate.update(sql,
