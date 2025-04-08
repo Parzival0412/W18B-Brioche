@@ -1,11 +1,17 @@
+/* manager.css */
+
+/* 整体背景 */
 .manager-container {
-    background-color: #f8f8ff;
+    background-color: #f4f5f7;  /* 灰色背景 */
     min-height: 100vh;
 }
 
+/* 顶部导航栏 */
 .manager-header {
     display: flex;
-    background-color: #2c334c;
+    background-color: #f9fafb;  /* 浅白色 */
+    height: 60px;
+    line-height: 60px;
 }
 
 .manager-header-left {
@@ -13,7 +19,7 @@
     height: 60px;
     padding-left: 10px;
     display: flex;
-    align-items: center
+    align-items: center;
 }
 
 .manager-header-left img {
@@ -24,16 +30,16 @@
 .manager-header-left .title {
     flex: 1;
     margin-left: 5px;
-    font-size: 20px;
+    font-size: 22px;  /* 稍大字体 */
     font-weight: bold;
-    color: #ddd
+    color: #333;      /* 深灰色 */
 }
 
 .manager-header-center {
     flex: 1;
     width: 0;
     display: flex;
-    align-items: center
+    align-items: center;
 }
 
 .manager-header-right {
@@ -47,26 +53,79 @@
     display: flex;
     align-items: center;
     padding-right: 10px;
-    color: #ccc;
-    cursor: default
+    color: #333;
+    cursor: default;
 }
 
 .manager-header-right .avatar img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    margin-right: 5px
+    margin-right: 5px;
 }
 
+/* 主体区域 */
 .manager-main {
     display: flex;
 }
 
+
 .manager-main-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 200px;
-    min-height: calc(100vh - 60px);
-    box-shadow: 0 0 6px rgba(0, 21, 41, .35);
+    min-height: calc(100vh - 60px); /* 60px 是 header 高度 */
+    background-color: #f9f9f9;
+    border-right: 1px solid #eee;
 }
+
+.menu-wrapper {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.logout-container {
+    padding: 16px;
+    cursor: pointer;
+    color: #555;
+    font-weight: bold;
+    text-align: center;
+    border-top: 1px solid #eee;
+    transition: background-color 0.3s;
+}
+
+.logout-container:hover {
+    background-color: #f0f0f0;
+    color: #007bff;
+}
+
+
+.manager-header-left {
+    display: flex;
+    align-items: center;
+    /* 其他原有样式，如 padding-left, height 等 */
+}
+
+.logo-icon {
+    width: 24px;  /* 图标宽度 */
+    height: 24px; /* 图标高度 */
+}
+
+.title-wrap {
+    margin-left: 8px; /* 图标和文字之间留点间距 */
+    line-height: 1.2; /* 行距稍微紧凑 */
+    display: flex;
+    flex-direction: column; /* 垂直方向排列两行 */
+}
+
+.title-line1,
+.title-line2 {
+    font-size: 24px;  /* 字体大小 */
+    color: #000000;      /* 如果是深色背景下，文字一般是白色 */
+    font-weight: 600; /* 半粗 */
+}
+
 
 .manager-main-right {
     flex: 1;
@@ -74,63 +133,62 @@
     padding: 10px;
 }
 
+/* 内容区域卡片样式 */
+.manager-main-right .search,
+.manager-main-right .operation,
+.manager-main-right .table,
+.card {
+    background-color: #fff;  /* 白色 */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 .manager-main-right .search {
     padding: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
 }
 
 .manager-main-right .operation {
     margin-top: 5px;
     padding: 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1)
 }
 
 .manager-main-right .table {
     margin-top: 5px;
     padding: 15px 10px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
 }
 
 .manager-main-right .table .pagination {
     margin-top: 10px;
 }
 
+/* 通用卡片 */
 .card {
     padding: 20px;
     background-color: #fff;
     border-radius: 5px;
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* ElementUI */
+/* Element UI 左侧菜单 */
 .el-menu {
     width: 200px;
     height: 100%;
-    background-color: #222b40;
+    background-color: #f9fafb !important;  /* 浅白色 */
 }
 
 .el-submenu__title {
-    color: #ccc;
+    color: #333 !important;  /* 深灰 */
     height: 50px;
     line-height: 50px;
+    background-color: #f9fafb !important;
 }
 
 .el-menu-item {
-    color: #ccc;
+    color: #333 !important;  /* 深灰 */
     height: 50px;
     line-height: 50px;
-    background-color: #222b40 !important; /* 必须加上这个背景色，否则鼠标离开会出现白色 */
-}
-
-.el-menu-item.is-active {
-    /*background-color: #2bb7e5 !important;*/
-    /*color: #fff;*/
+    background-color: #f9fafb !important;
 }
 
 .el-menu--inline .el-menu-item {
@@ -138,20 +196,12 @@
 }
 
 .el-menu .is-active {
-    color: #3399ff !important;
+    color: #007bff !important;  /* 激活菜单蓝色 */
 }
 
+.el-menu-item:hover,
 .el-submenu__title:hover {
-    background-color: #222 !important;
-}
-
-.el-menu-item:not(.is-active):hover {
-    /*background-color: #0376bf !important;*/
-    /*color: #fff;*/
-}
-
-.el-menu-item:hover {
-    background-color: #222 !important;
+    background-color: #f0f1f2 !important;  /* 浅灰 hover */
 }
 
 .el-submenu__icon-arrow {
@@ -159,7 +209,7 @@
 }
 
 .el-breadcrumb__inner {
-    color: #ccc !important;
+    color: #333 !important;
 }
 
 .el-dropdown-menu {
@@ -173,4 +223,10 @@
 th.el-table__cell {
     background-color: #f8f8f8 !important;
     color: #666;
+}
+
+/* 覆盖 Element UI 主按钮颜色为蓝色 */
+:deep(.el-button--primary) {
+    background-color: #007bff !important;
+    border-color: #007bff !important;
 }

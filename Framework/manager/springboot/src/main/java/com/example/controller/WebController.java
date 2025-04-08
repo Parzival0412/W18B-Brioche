@@ -7,6 +7,7 @@ import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.service.AdminService;
+import com.example.utils.SHA256Encryption;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -35,13 +36,14 @@ public class WebController {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
+            account.setPassword(SHA256Encryption.encrypt(account.getPassword()));
             account = adminService.login(account);
         }
         return Result.success(account);
     }
 
     /**
-     * 注册
+     * 注册{密码加密}
      */
     @PostMapping("/register")
     public Result register(@RequestBody Account account) {
@@ -50,6 +52,7 @@ public class WebController {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
+            account.setPassword(SHA256Encryption.encrypt(account.getPassword()));
             adminService.register(account);
         }
         return Result.success();
@@ -65,6 +68,7 @@ public class WebController {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
+            account.setPassword(SHA256Encryption.encrypt(account.getPassword()));
             adminService.updatePassword(account);
         }
         return Result.success();

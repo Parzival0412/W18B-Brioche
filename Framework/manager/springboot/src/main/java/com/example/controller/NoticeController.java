@@ -19,13 +19,12 @@ public class NoticeController {
     private NoticeService noticeService;
 
     /**
-     * 新增
+     * 接收原版文件的接口
      */
-//    @PostMapping("/add")
-//    public Result add(@RequestBody Notice notice) {
-//        noticeService.add(notice);
-//        return Result.success();
-//    }
+    @PostMapping("/receive")
+    public Result receive() {
+        return Result.success();
+    }
 
     /**
      * 删除
