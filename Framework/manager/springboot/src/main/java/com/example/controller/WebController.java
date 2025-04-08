@@ -27,7 +27,7 @@ public class WebController {
     }
 
     /**
-     * 登录
+     * 登录接口：接收明文密码，后端加密后进行账号验证
      */
     @PostMapping("/login")
     public Result login(@RequestBody Account account) {
@@ -35,15 +35,20 @@ public class WebController {
                 || ObjectUtil.isEmpty(account.getRole())) {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
+
+        // 后端统一对明文密码进行 SHA-256 加密
+        String encryptedPassword = SHA256Encryption.encrypt(account.getPassword());
+        account.setPassword(encryptedPassword);
+
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
-            account.setPassword(SHA256Encryption.encrypt(account.getPassword()));
             account = adminService.login(account);
         }
+
         return Result.success(account);
     }
 
     /**
-     * 注册{密码加密}
+     * 注册接口：注册时对密码进行加密后存入数据库
      */
     @PostMapping("/register")
     public Result register(@RequestBody Account account) {
@@ -51,26 +56,36 @@ public class WebController {
                 || ObjectUtil.isEmpty(account.getRole())) {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
+
+        // 加密用户输入的明文密码
+        String encryptedPassword = SHA256Encryption.encrypt(account.getPassword());
+        account.setPassword(encryptedPassword);
+
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
-            account.setPassword(SHA256Encryption.encrypt(account.getPassword()));
             adminService.register(account);
         }
+
         return Result.success();
     }
 
     /**
-     * 修改密码
+     * 修改密码接口：验证原密码，加密新密码后更新数据库
      */
     @PutMapping("/updatePassword")
     public Result updatePassword(@RequestBody Account account) {
         if (StrUtil.isBlank(account.getUsername()) || StrUtil.isBlank(account.getPassword())
-                || ObjectUtil.isEmpty(account.getNewPassword())) {
+                || StrUtil.isBlank(account.getNewPassword()) || ObjectUtil.isEmpty(account.getRole())) {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
+
+        // 加密旧密码和新密码
+        account.setPassword(SHA256Encryption.encrypt(account.getPassword()));
+        account.setNewPassword(SHA256Encryption.encrypt(account.getNewPassword()));
+
         if (RoleEnum.ADMIN.name().equals(account.getRole())) {
-            account.setPassword(SHA256Encryption.encrypt(account.getPassword()));
             adminService.updatePassword(account);
         }
+
         return Result.success();
     }
 

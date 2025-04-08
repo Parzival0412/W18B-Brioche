@@ -1,15 +1,15 @@
 <template>
   <div>
     <el-card style="width: 50%">
-      <el-form ref="formRef" :model="user" :rules="rules" label-width="100px" style="padding-right: 50px">
+      <el-form ref="formRef" :model="user" :rules="rules" label-width="150px" style="padding-right: 50px">
         <el-form-item label="Current Password" prop="password">
-          <el-input show-password v-model="user.password" placeholder="Enter current password"></el-input>
+          <el-input show-password v-model="user.password" placeholder="Enter current password" autocomplete="off" />
         </el-form-item>
         <el-form-item label="New Password" prop="newPassword">
-          <el-input show-password v-model="user.newPassword" placeholder="Enter new password"></el-input>
+          <el-input show-password v-model="user.newPassword" placeholder="Enter new password" autocomplete="off" />
         </el-form-item>
         <el-form-item label="Confirm New Password" prop="confirmPassword">
-          <el-input show-password v-model="user.confirmPassword" placeholder="Confirm new password"></el-input>
+          <el-input show-password v-model="user.confirmPassword" placeholder="Confirm new password" autocomplete="off" />
         </el-form-item>
         <div style="text-align: center; margin-bottom: 20px">
           <el-button type="primary" @click="update">Confirm Change</el-button>
@@ -34,7 +34,13 @@ export default {
     }
 
     return {
-      user: JSON.parse(localStorage.getItem('xm-user') || '{}'),
+      user: {
+        username: '',
+        role: '',
+        password: '',
+        newPassword: '',
+        confirmPassword: ''
+      },
       rules: {
         password: [
           { required: true, message: 'Please enter your current password', trigger: 'blur' },
@@ -49,7 +55,9 @@ export default {
     }
   },
   created() {
-
+    const savedUser = JSON.parse(localStorage.getItem('xm-user') || '{}')
+    this.user.username = savedUser.username || ''
+    this.user.role = savedUser.role || ''
   },
   methods: {
     update() {
@@ -57,8 +65,8 @@ export default {
         if (valid) {
           this.$request.put('/updatePassword', this.user).then(res => {
             if (res.code === '200') {
-              // Successfully updated
-              localStorage.removeItem('xm-user')   // Clear cached user information
+              // 清除缓存用户信息
+              localStorage.removeItem('xm-user')
               this.$message.success('Password changed successfully')
               this.$router.push('/login')
             } else {
