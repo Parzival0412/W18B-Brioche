@@ -75,23 +75,42 @@
     </div>
 
     <el-dialog title="Invoice Information" :visible.sync="fromVisible" width="40%" :close-on-click-modal="false" destroy-on-close>
-      <el-form label-width="100px" style="padding-right: 50px" :model="form" ref="formRef">
+      <el-form label-width="120px" style="padding-right: 50px" :model="form" ref="formRef">
         <el-form-item prop="invoiceNumber" label="Invoice Number">
           <el-input v-model="form.invoiceNumber" autocomplete="off"></el-input>
         </el-form-item>
+
         <el-form-item prop="issueDate" label="Issue Date">
           <el-date-picker v-model="form.issueDate" type="date" placeholder="Select Date"></el-date-picker>
         </el-form-item>
+
         <el-form-item prop="supplierName" label="Supplier">
           <el-input v-model="form.supplierName" autocomplete="off"></el-input>
         </el-form-item>
+
         <el-form-item prop="customerName" label="Customer">
           <el-input v-model="form.customerName" autocomplete="off"></el-input>
         </el-form-item>
+
         <el-form-item prop="totalAmount" label="Total Amount">
           <el-input v-model="form.totalAmount" type="number"></el-input>
         </el-form-item>
+
+        <el-form-item prop="gstIncluded" label="GST Included">
+          <el-switch v-model="form.gstIncluded" active-text="Yes" inactive-text="No"></el-switch>
+        </el-form-item>
+
+        <el-form-item prop="items" label="Items">
+          <el-input
+              v-model="form.items"
+              type="textarea"
+              placeholder='For example: [{"items":"Item A"}, {"items":"Item B"}]'
+              rows="3">
+          </el-input>
+        </el-form-item>
+
       </el-form>
+
       <div slot="footer" class="dialog-footer">
         <el-button @click="fromVisible = false">Cancel</el-button>
         <el-button type="primary" @click="save">Confirm</el-button>
@@ -155,18 +174,35 @@ export default {
     save() {
       this.$refs.formRef.validate((valid) => {
         if (valid) {
+          //格式检查：items 必须是合法 JSON 字符串
+          if (typeof this.form.items === 'string') {
+            try {
+              JSON.parse(this.form.items); // 检查格式合法性
+            } catch (e) {
+              this.$message.error('Items 格式错误，请输入合法 JSON，如 [{"items":"Item A"}, {"items":"Item B"}]');
+              return;
+            }
+          }
+
+          //构造请求参数（保持原逻辑）
+          const url = this.form.invoiceId ? '/notice/update' : '/notice/add';
+          const method = this.form.invoiceId ? 'PUT' : 'POST';
+
           this.$request({
-            url: this.form.invoiceId ? '/notice/update' : '/notice/add',
-            method: this.form.invoiceId ? 'PUT' : 'POST',
+            url: url,
+            method: method,
             data: this.form
           }).then(res => {
             if (res.code === '200') {
               this.$message.success('Saved successfully');
-              this.load(1);
-              this.fromVisible = false;
+              this.load(1);              // 刷新列表
+              this.fromVisible = false;  // 关闭弹窗
             } else {
-              this.$message.error(res.msg);
+              this.$message.error(res.msg || '保存失败');
             }
+          }).catch(err => {
+            this.$message.error('请求出错，请稍后重试');
+            console.error(err);
           });
         }
       });
