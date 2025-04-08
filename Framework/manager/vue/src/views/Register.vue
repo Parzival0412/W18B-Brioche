@@ -98,7 +98,7 @@ export default {
   },
   created() {},
   methods: {
-    register() {
+    /*register() {
       this.$refs["formRef"].validate((valid) => {
         if (valid) {
           // 验证通过
@@ -112,7 +112,26 @@ export default {
           });
         }
       });
-    },
+    },*/
+    register() {
+      this.$refs.formRef.validate((valid) => {
+        if (valid) {
+          const { username, password } = this.form;
+          this.$request.post("/register", {
+            username,
+            password,
+            role: "ADMIN"  // 新增这行，跟后端的 RoleEnum.ADMIN 对应
+          }).then((res) => {
+            if (res.code === "200") {
+              this.$message.success("Registration successful");
+              this.$router.push("/login");
+            } else {
+              this.$message.error(res.msg);
+            }
+          });
+        }
+      });
+    }
   },
 };
 </script>
