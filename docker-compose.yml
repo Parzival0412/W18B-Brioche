@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: ./Framework/manager/springboot
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://host.docker.internal:3306/testmysql?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=GMT%2b8&allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=123456
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./Framework/manager/vue
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    volumes:
+      - /app/node_modules # 防止宿主机 node_modules 覆盖容器的
+
+networks:
+  app-network:
+    driver: bridge
